@@ -13,11 +13,11 @@ Blueflex Slipper Showroom is a multi-page React + TypeScript experience that hig
 3) Start the local dev server: `npm run dev` (defaults to http://localhost:5173).
 
 ## Available scripts
-- `npm run dev` — start the Vite dev server with hot reload.
-- `npm run build` — create a production build in `dist/`.
-- `npm run build:dev` — build in development mode for debugging bundled output.
-- `npm run preview` — serve the built `dist/` locally (run after `npm run build`).
-- `npm run lint` — lint the project with ESLint.
+- `npm run dev` ï¿½ start the Vite dev server with hot reload.
+- `npm run build` ï¿½ create a production build in `dist/`.
+- `npm run build:dev` ï¿½ build in development mode for debugging bundled output.
+- `npm run preview` ï¿½ serve the built `dist/` locally (run after `npm run build`).
+- `npm run lint` ï¿½ lint the project with ESLint.
 
 ## Development workflow
 - Pages live in `src/pages`, shared components in `src/components`, and routing is defined in `src/App.tsx`.
