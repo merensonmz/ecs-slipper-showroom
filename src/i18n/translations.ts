@@ -209,7 +209,7 @@ export const translations = {
         }
       },
       corporate: {
-        title: { tr: "Kurumsal Hediyeler ve Promosyon", en: "Corporate Gifts & Promotion", ar: "هدايا الشركات والترويج" },
+        title: { tr: "Kurumsal Hediyeler ve Promosyonlar", en: "Corporate Gifts & Promotions", ar: "هدايا الشركات والترويج" },
         desc: {
           tr: "Terlikleri akılda kalıcı markalı hediyelere dönüştürün. Fuarlar, çalışan hediyeleri ve müşteri takdir paketleri için logonuzla promosyon terlikleri üretiyoruz.",
           en: "Turn slippers into memorable branded gifts. We manufacture promotional slippers with your logo for trade shows, employee gifts, and client appreciation packages.",

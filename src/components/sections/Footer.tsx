@@ -76,7 +76,7 @@ const Footer = () => {
                   +90 555 000 00 00
                 </a>
               </li>
-              <li>Industrial Zone, Denizli, Türkiye</li>
+              <li>Industrial Zone, Gaziantep, Türkiye</li>
             </ul>
           </div>
         </div>

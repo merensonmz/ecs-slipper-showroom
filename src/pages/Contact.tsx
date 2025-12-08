@@ -198,7 +198,7 @@ const Contact = () => {
                     <div>
                       <p className="font-medium">Factory Location</p>
                       <p className="text-muted-foreground">
-                        Industrial Zone, Denizli<br />
+                        Industrial Zone, Gaziantep<br />
                         Türkiye
                       </p>
                     </div>

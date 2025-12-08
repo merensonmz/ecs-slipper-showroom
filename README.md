@@ -1,73 +1,87 @@
-# Welcome to your Lovable project
+# Blueflex Slipper Showroom
 
-## Project info
+<<<<<<< ours
+Blueflex Slipper Showroom is a multi-page React + TypeScript experience that highlights Blueflex indoor slipper lines, customization workflows, and factory capabilities for wholesale buyers. It is built with Vite, Tailwind CSS, shadcn-ui, React Router, and TanStack Query with multi-language support.
 
-**URL**: https://lovable.dev/projects/37ff949c-9591-47a1-9e6d-394a9139fc87
+## Prerequisites
+- Node.js 18+ (Node 20 LTS recommended for Vite 5)
+- npm (bundled with Node.js)
 
-## How can I edit this code?
+## Getting started
+1) Clone the repository and enter the project folder.
+2) Install dependencies: `npm install`.
+3) Start the local dev server: `npm run dev` (defaults to http://localhost:5173).
 
-There are several ways of editing your application.
+## Available scripts
+- `npm run dev` — start the Vite dev server with hot reload.
+- `npm run build` — create a production build in `dist/`.
+- `npm run build:dev` — build in development mode for debugging bundled output.
+- `npm run preview` — serve the built `dist/` locally (run after `npm run build`).
+- `npm run lint` — lint the project with ESLint.
 
-**Use Lovable**
+## Development workflow
+- Pages live in `src/pages`, shared components in `src/components`, and routing is defined in `src/App.tsx`.
+- Styling uses Tailwind CSS and shadcn-ui; adjust design tokens in `tailwind.config.ts`.
+- Locale strings and language handling are under `src/i18n`.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/37ff949c-9591-47a1-9e6d-394a9139fc87) and start prompting.
+## Testing & quality
+- Run `npm run lint` before committing to catch lint and type issues; add tests as needed alongside features.
 
-Changes made via Lovable will be committed automatically to this repo.
+## Build & deployment
+- Build for production with `npm run build`; output files are emitted to `dist/`.
+- Preview the production build locally via `npm run preview`.
+- Deploy by serving the `dist/` folder on any static host or behind your CI/CD pipeline (e.g., Vercel, Netlify, S3 + CloudFront, or nginx).
 
-**Use your preferred IDE**
+## Tech stack
+- Vite + React 18 + TypeScript
+- Tailwind CSS + shadcn-ui + Radix primitives
+- React Router and TanStack Query
+=======
+Modern, Vite-powered React UI that highlights the Blueflex slipper collection with responsive layouts, animations, and shadcn-ui components.
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## Prerequisites
+- Node.js **18+** (Node 20 recommended). Install via [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) for easy version management.
+- npm (ships with Node.js).
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+## Developer setup
+1. Clone the repository and navigate into it.
+   ```sh
+   git clone <YOUR_GIT_URL>
+   cd ecs-slipper-showroom
+   ```
+2. Install dependencies.
+   ```sh
+   npm install
+   ```
+3. Start the development server with hot reload.
+   ```sh
+   npm run dev
+   ```
+   Vite prints the local and network URLs in the terminal (default: http://localhost:5173).
 
-Follow these steps:
+## Available scripts
+- **npm run dev** â€“ Start the Vite dev server for local development.
+- **npm run build** â€“ Create an optimized production build in the `dist/` directory.
+- **npm run build:dev** â€“ Produce a development-mode bundle (useful for integration environments that expect a build artifact but still need readable output).
+- **npm run preview** â€“ Serve the contents of `dist/` to verify a production build locally.
+- **npm run lint** â€“ Run ESLint across the project source.
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+## Testing, linting, and builds
+- Run linters before committing to keep code quality consistent:
+  ```sh
+  npm run lint
+  ```
+- Create a production build to validate that assets compile correctly:
+  ```sh
+  npm run build
+  ```
+- Inspect the compiled build locally (after running `npm run build`):
+  ```sh
+  npm run preview
+  ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
-
-# Step 3: Install the necessary dependencies.
-npm i
-
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
-
-**Edit a file directly in GitHub**
-
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
-
-**Use GitHub Codespaces**
-
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/37ff949c-9591-47a1-9e6d-394a9139fc87) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+## Deployment
+1. Ensure dependencies are installed and the project builds successfully (`npm run build`).
+2. Deploy the contents of the `dist/` directory to your static hosting of choice (e.g., Netlify, Vercel, or an S3 + CDN setup).
+3. If your platform supports build commands, configure it to run `npm install` followed by `npm run build` with Node.js 18+.
+>>>>>>> theirs

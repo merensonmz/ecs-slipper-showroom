@@ -23,7 +23,7 @@ const industries = [
   },
   {
     icon: Gift,
-    title: "Corporate Gifts & Promotion",
+    title: "Corporate Gifts & Promotions",
     description: "Turn slippers into memorable branded gifts. We manufacture promotional slippers with your logo for trade shows, employee gifts, and client appreciation packages.",
     features: ["Full customization", "Gift packaging", "Small MOQ available"],
   },
