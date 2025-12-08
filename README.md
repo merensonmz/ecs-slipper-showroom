@@ -34,6 +34,9 @@ npm i
 
 # Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
+
+# Step 5: Run the automated tests (use npm run test:run in CI)
+npm run test
 ```
 
 **Edit a file directly in GitHub**
