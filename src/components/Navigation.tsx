@@ -2,21 +2,24 @@ import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-
-const navItems = [
-  { label: "Home", path: "/" },
-  { label: "Slipper Models", path: "/models" },
-  { label: "Industries", path: "/industries" },
-  { label: "Our Factory", path: "/factory" },
-  { label: "Customization", path: "/customization" },
-  { label: "Sustainability", path: "/sustainability" },
-  { label: "FAQ", path: "/faq" },
-  { label: "Contact", path: "/contact" },
-];
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "@/hooks/useTranslation";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const { t, isRTL } = useTranslation();
+
+  const navItems = [
+    { label: t("nav.home"), path: "/" },
+    { label: t("nav.models"), path: "/models" },
+    { label: t("nav.industries"), path: "/industries" },
+    { label: t("nav.factory"), path: "/factory" },
+    { label: t("nav.customization"), path: "/customization" },
+    { label: t("nav.sustainability"), path: "/sustainability" },
+    { label: t("nav.faq"), path: "/faq" },
+    { label: t("nav.contact"), path: "/contact" },
+  ];
 
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
@@ -30,7 +33,7 @@ const Navigation = () => {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-1">
+          <div className={`hidden lg:flex items-center gap-1 ${isRTL ? "flex-row-reverse" : ""}`}>
             {navItems.map((item) => (
               <Link
                 key={item.path}
@@ -46,21 +49,25 @@ const Navigation = () => {
             ))}
           </div>
 
-          {/* CTA Button - Desktop */}
-          <div className="hidden lg:block">
+          {/* Language Switcher & CTA - Desktop */}
+          <div className={`hidden lg:flex items-center gap-4 ${isRTL ? "flex-row-reverse" : ""}`}>
+            <LanguageSwitcher />
             <Button asChild size="sm">
-              <Link to="/contact">Get a Quote</Link>
+              <Link to="/contact">{t("nav.getQuote")}</Link>
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-foreground"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
-          </button>
+          <div className="lg:hidden flex items-center gap-3">
+            <LanguageSwitcher />
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 text-foreground"
+              aria-label="Toggle menu"
+            >
+              {isOpen ? <X size={24} /> : <Menu size={24} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Navigation */}
@@ -84,7 +91,7 @@ const Navigation = () => {
               <div className="pt-4 px-4">
                 <Button asChild className="w-full">
                   <Link to="/contact" onClick={() => setIsOpen(false)}>
-                    Get a Quote
+                    {t("nav.getQuote")}
                   </Link>
                 </Button>
               </div>
