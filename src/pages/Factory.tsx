@@ -2,59 +2,32 @@ import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Factory as FactoryIcon, Shield, Zap, BarChart3 } from "lucide-react";
 import workshopImage from "@/assets/workshop.jpg";
+import { useTranslation } from "@/hooks/useTranslation";
 
-const capabilities = [
-  {
-    icon: BarChart3,
-    title: "Production Capacity",
-    description: "50,000+ pairs per month with room to scale. We can handle orders from 500 to 50,000 pairs per run.",
-  },
-  {
-    icon: Shield,
-    title: "Quality Control",
-    description: "Every batch goes through multi-stage inspection. We check materials, stitching, sizing, and finish before shipping.",
-  },
-  {
-    icon: Zap,
-    title: "Lean Processes",
-    description: "Modern machinery and trained teams ensure efficient production with minimal waste and fast turnaround.",
-  },
-  {
-    icon: FactoryIcon,
-    title: "Consistent Output",
-    description: "Standardized processes mean every pair matches the sample. No surprises, just reliable quality.",
-  },
-];
+const capabilityConfig = [
+  { key: "capacity", icon: BarChart3 },
+  { key: "quality", icon: Shield },
+  { key: "lean", icon: Zap },
+  { key: "consistent", icon: FactoryIcon },
+] as const;
 
-const productionSteps = [
-  {
-    step: "01",
-    title: "Material Sourcing",
-    description: "We source quality fabrics, foams, and soles from trusted suppliers.",
-  },
-  {
-    step: "02",
-    title: "Cutting & Stitching",
-    description: "Precision cutting machines and skilled operators create the upper components.",
-  },
-  {
-    step: "03",
-    title: "Assembly & Gluing",
-    description: "Uppers are attached to insoles and outsoles using industrial adhesives.",
-  },
-  {
-    step: "04",
-    title: "Quality Check",
-    description: "Each pair is inspected for defects, sizing accuracy, and finish quality.",
-  },
-  {
-    step: "05",
-    title: "Packaging & Shipment",
-    description: "Products are packed per your specs and shipped to your location.",
-  },
-];
+const processKeys = ["s1", "s2", "s3", "s4", "s5"] as const;
 
 const Factory = () => {
+  const { t, isRTL } = useTranslation();
+
+  const capabilities = capabilityConfig.map(({ key, icon }) => ({
+    icon,
+    title: t(`factory.capabilities.${key}.title`),
+    description: t(`factory.capabilities.${key}.desc`),
+  }));
+
+  const steps = processKeys.map((key, index) => ({
+    step: `${index + 1}`.padStart(2, "0"),
+    title: t(`factory.steps.${key}.title`),
+    description: t(`factory.steps.${key}.desc`),
+  }));
+
   return (
     <>
       {/* Hero */}
@@ -68,17 +41,15 @@ const Factory = () => {
           <div className="absolute inset-0 bg-gradient-to-r from-background/95 via-background/70 to-transparent" />
         </div>
         <div className="container-wide section-padding relative z-10">
-          <div className="max-w-2xl">
+          <div className={`max-w-2xl ${isRTL ? "text-right" : ""}`}>
             <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground font-medium mb-4">
-              Behind the Scenes
+              {t("factory.badge")}
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display mb-6">
-              Modern Slipper Manufacturing Facility
+              {t("factory.title")}
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Our factory in Türkiye combines modern machinery with skilled workers 
-              to produce consistent, high-quality slippers at scale. We're not a craft 
-              workshop—we're a manufacturing partner built for volume.
+              {t("factory.desc")}
             </p>
           </div>
         </div>
@@ -88,19 +59,21 @@ const Factory = () => {
       <section className="section-padding bg-background">
         <div className="container-wide">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display mb-4">Our Capabilities</h2>
+            <h2 className="text-3xl md:text-4xl font-display mb-4">
+              {t("factory.capabilitiesTitle")}
+            </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              What makes Blueflex a reliable manufacturing partner for your slipper needs.
+              {t("factory.capabilitiesDesc")}
             </p>
           </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
+          <div className={`grid sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 ${isRTL ? "text-right" : ""}`}>
             {capabilities.map((item, index) => (
               <div
                 key={item.title}
                 className={`p-6 md:p-8 rounded-2xl bg-card border border-border/50 shadow-card animate-slide-up stagger-${index + 1}`}
                 style={{ opacity: 0 }}
               >
-                <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4">
+                <div className={`w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4 ${isRTL ? "ml-auto" : ""}`}>
                   <item.icon className="w-6 h-6 text-primary" />
                 </div>
                 <h3 className="text-lg font-display font-semibold mb-2">{item.title}</h3>
@@ -117,13 +90,15 @@ const Factory = () => {
       <section className="section-padding gradient-warm">
         <div className="container-wide">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-display mb-4">Production Process</h2>
+            <h2 className="text-3xl md:text-4xl font-display mb-4">
+              {t("factory.processTitle")}
+            </h2>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              From raw materials to finished product—here's how we manufacture your slippers.
+              {t("factory.processDesc")}
             </p>
           </div>
-          <div className="grid md:grid-cols-5 gap-6">
-            {productionSteps.map((item, index) => (
+          <div className={`grid md:grid-cols-5 gap-6 ${isRTL ? "text-right" : ""}`}>
+            {steps.map((item, index) => (
               <div
                 key={item.step}
                 className={`relative animate-slide-up stagger-${index + 1}`}
@@ -138,8 +113,10 @@ const Factory = () => {
                     {item.description}
                   </p>
                 </div>
-                {index < productionSteps.length - 1 && (
-                  <div className="hidden md:block absolute top-8 left-[60%] w-[80%] h-0.5 bg-border" />
+                {index < steps.length - 1 && (
+                  <div
+                    className={`hidden md:block absolute top-8 ${isRTL ? "right-[60%]" : "left-[60%]"} w-[80%] h-0.5 bg-border`}
+                  />
                 )}
               </div>
             ))}
@@ -151,18 +128,17 @@ const Factory = () => {
       <section className="section-padding bg-background">
         <div className="container-wide text-center">
           <h2 className="text-3xl md:text-4xl font-display mb-4">
-            Want to see our facility?
+            {t("factory.cta.title")}
           </h2>
           <p className="text-muted-foreground max-w-xl mx-auto mb-8">
-            We welcome factory visits from serious partners. Get in touch to schedule 
-            a tour or request production samples.
+            {t("factory.cta.desc")}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button size="lg" asChild>
-              <Link to="/contact">Schedule a Visit</Link>
+              <Link to="/contact">{t("factory.cta.schedule")}</Link>
             </Button>
             <Button variant="outline" size="lg" asChild>
-              <Link to="/models">View Our Products</Link>
+              <Link to="/models">{t("factory.cta.viewProducts")}</Link>
             </Button>
           </div>
         </div>

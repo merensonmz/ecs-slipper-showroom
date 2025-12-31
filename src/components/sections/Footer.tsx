@@ -72,8 +72,8 @@ const Footer = () => {
                 </a>
               </li>
               <li>
-                <a href="tel:+905550000000" className="hover:text-primary-foreground transition-colors">
-                  +90 555 000 00 00
+                <a href="tel:+905336688412" className="hover:text-primary-foreground transition-colors">
+                  +90 533 668 84 12
                 </a>
               </li>
               <li>Industrial Zone, Gaziantep, Türkiye</li>

@@ -2,118 +2,183 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import slipperCloud from "@/assets/slipper-cloud.jpg";
-import slipperHotel from "@/assets/slipper-hotel.jpg";
-import slipperKids from "@/assets/slipper-kids.jpg";
-import slipperPremium from "@/assets/slipper-premium.jpg";
-import slipperNatural from "@/assets/slipper-natural.jpg";
-import slipperSummer from "@/assets/slipper-summer.jpg";
+import winterWomen from "@/assets/WinterWomen.jpg";
+import merdaneWinter from "@/assets/MerdaneWinter.jpg";
+import montaMan from "@/assets/MontaMan.jpg";
+import montaMan2 from "@/assets/MontaMan2.jpg";
+import montaMan3 from "@/assets/MontaMan3.jpg";
+import montaMan4 from "@/assets/MontaMan4.jpg";
+import summerMan from "@/assets/SummerMan.jpg";
+import summerMan2 from "@/assets/SummerMan2.jpg";
+import summerWomen from "@/assets/SummerWomen.jpg";
+import summerWomen2 from "@/assets/SummerWomen2.jpg";
+import summerWomen3 from "@/assets/SummerWomen3.jpg";
+import summerWomen4 from "@/assets/SummerWomen4.jpg";
+import summerWomen5 from "@/assets/SummerWomen5.jpg";
+import summerWomen6 from "@/assets/SummerWomen6.jpg";
+import summerWomen7 from "@/assets/SummerWomen7.jpg";
+import summerWomen8 from "@/assets/SummerWomen8.jpg";
+import { useTranslation } from "@/hooks/useTranslation";
 
-const filters = ["All", "Home", "Hotel", "Kids", "Promotional"];
+const filterConfig = ["all", "home", "plain", "beach", "sabo", "women", "kids", "eva"] as const;
+type FilterKey = (typeof filterConfig)[number];
 
-const models = [
+const modelConfig = [
   {
-    id: 1,
-    name: "Home Comfort",
-    image: slipperCloud,
-    description: "Our bestselling home slipper with memory foam insole. Perfect for everyday indoor use with maximum comfort and durability.",
-    tags: ["Unisex", "Home", "Best Seller"],
-    category: "Home",
-    specs: {
-      upper: "Soft fleece",
-      sole: "EVA anti-slip",
-      sizes: "36-46 EU",
-    },
+    key: "winterCozyWomen",
+    image: winterWomen,
+    categories: ["home", "women"],
+    tags: ["home", "womenFocus", "warmLining"],
+    specs: { upper: "softFleece", sole: "polyurethane", sizes: "36-41 EU" },
   },
   {
-    id: 2,
-    name: "Hotel Classic",
-    image: slipperHotel,
-    description: "Elegant open-toe design for hotels and hospitality. Lightweight, disposable-friendly, and available in bulk quantities.",
-    tags: ["Hotel & Spa", "Custom Logo Available"],
-    category: "Hotel",
-    specs: {
-      upper: "Terry cloth",
-      sole: "Non-woven anti-slip",
-      sizes: "One size / S-M-L",
-    },
+    key: "merdaneWinter",
+    image: merdaneWinter,
+    categories: ["home", "eva"],
+    tags: ["evaSole", "warmLining"],
+    specs: { upper: "softPlush", sole: "evaAntiSlip", sizes: "40-45 EU" },
   },
   {
-    id: 3,
-    name: "Spa & Wellness",
-    image: slipperNatural,
-    description: "Premium closed-toe slipper for spa and wellness centers. Soft, absorbent, and designed for a luxurious guest experience.",
-    tags: ["Hotel & Spa", "Premium"],
-    category: "Hotel",
-    specs: {
-      upper: "Waffle cotton",
-      sole: "Rubber anti-slip",
-      sizes: "36-44 EU",
-    },
+    key: "montaMan",
+    image: montaMan,
+    categories: ["sabo", "eva"],
+    tags: ["saboStyle", "evaSole", "lightweight"],
+    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "40-45 EU" },
   },
   {
-    id: 4,
-    name: "Kids Cozy",
-    image: slipperKids,
-    description: "Fun and colorful slippers for children. Safe, soft materials with extra grip for active little feet.",
-    tags: ["Kids", "Safe Materials"],
-    category: "Kids",
-    specs: {
-      upper: "Soft plush",
-      sole: "TPR anti-slip",
-      sizes: "22-34 EU",
-    },
+    key: "montaMan2",
+    image: montaMan2,
+    categories: ["sabo", "eva"],
+    tags: ["saboStyle", "evaSole", "lightweight"],
+    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "40-45 EU" },
   },
   {
-    id: 5,
-    name: "Corporate Gift",
-    image: slipperPremium,
-    description: "High-quality slippers perfect for corporate gifts and promotional campaigns. Fully customizable with your branding.",
-    tags: ["Promotional", "Custom Logo Available"],
-    category: "Promotional",
-    specs: {
-      upper: "Velour",
-      sole: "EVA anti-slip",
-      sizes: "36-46 EU",
-    },
+    key: "montaMan3",
+    image: montaMan3,
+    categories: ["sabo", "eva"],
+    tags: ["saboStyle", "evaSole", "lightweight"],
+    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "40-45 EU" },
   },
   {
-    id: 6,
-    name: "Travel Lite",
-    image: slipperSummer,
-    description: "Compact foldable slippers ideal for travel kits, airlines, and hospitality welcome packages.",
-    tags: ["Hotel & Spa", "Lightweight"],
-    category: "Hotel",
-    specs: {
-      upper: "Microfiber",
-      sole: "TPE foldable",
-      sizes: "S-M-L-XL",
-    },
+    key: "montaMan4",
+    image: montaMan4,
+    categories: ["sabo", "eva"],
+    tags: ["saboStyle", "evaSole", "lightweight"],
+    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "40-45 EU" },
   },
-];
+  {
+    key: "summerMan",
+    image: summerMan,
+    categories: ["beach", "plain", "eva"],
+    tags: ["lightweight", "evaSole", "breathable"],
+    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "39-44 EU" },
+  },
+  {
+    key: "summerMan2",
+    image: summerMan2,
+    categories: ["beach", "plain", "eva"],
+    tags: ["lightweight", "evaSole", "breathable"],
+    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "39-44 EU" },
+  },
+  {
+    key: "summerWomen",
+    image: summerWomen,
+    categories: ["beach", "plain", "women", "eva"],
+    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
+    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
+  },
+  {
+    key: "summerWomen2",
+    image: summerWomen2,
+    categories: ["beach", "plain", "women", "eva"],
+    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
+    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
+  },
+  {
+    key: "summerWomen3",
+    image: summerWomen3,
+    categories: ["beach", "plain", "women", "eva"],
+    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
+    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
+  },
+  {
+    key: "summerWomen4",
+    image: summerWomen4,
+    categories: ["beach", "plain", "women", "eva"],
+    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
+    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
+  },
+  {
+    key: "summerWomen5",
+    image: summerWomen5,
+    categories: ["beach", "plain", "women", "eva"],
+    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
+    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
+  },
+  {
+    key: "summerWomen6",
+    image: summerWomen6,
+    categories: ["beach", "plain", "women", "eva"],
+    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
+    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
+  },
+  {
+    key: "summerWomen7",
+    image: summerWomen7,
+    categories: ["beach", "plain", "women", "eva"],
+    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
+    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
+  },
+  {
+    key: "summerWomen8",
+    image: summerWomen8,
+    categories: ["beach", "plain", "women", "eva"],
+    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
+    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
+  },
+] as const;
 
 const SlipperModels = () => {
-  const [activeFilter, setActiveFilter] = useState("All");
+  const { t, isRTL } = useTranslation();
+  const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
 
-  const filteredModels = activeFilter === "All" 
-    ? models 
-    : models.filter(m => m.category === activeFilter);
+  const filters = filterConfig.map((key) => ({
+    key,
+    label: t(`models.filters.${key}`),
+  }));
+
+  const models = modelConfig.map((model) => ({
+    ...model,
+    name: t(`models.products.${model.key}.name`),
+    description: t(`models.products.${model.key}.desc`),
+    tags: model.tags.map((tag) => t(`models.tags.${tag}`)),
+    specs: {
+      upper: t(`models.materials.${model.specs.upper}`),
+      sole: t(`models.materials.${model.specs.sole}`),
+      sizes: model.specs.sizes,
+    },
+    categories: model.categories,
+  }));
+
+  const filteredModels =
+    activeFilter === "all"
+      ? models
+      : models.filter((model) => model.categories.includes(activeFilter));
 
   return (
     <>
       {/* Header */}
       <section className="section-padding gradient-sand">
         <div className="container-wide">
-          <div className="max-w-3xl">
+          <div className={`max-w-3xl ${isRTL ? "text-right" : ""}`}>
             <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground font-medium mb-4">
-              Our Collection
+              {t("models.badge")}
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display mb-6">
-              Slipper Models
+              {t("models.title")}
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Browse our range of indoor slippers designed for homes, hotels, spas, and promotional use. 
-              All models are manufactured in our facility with consistent quality standards.
+              {t("models.desc")}
             </p>
           </div>
         </div>
@@ -123,27 +188,27 @@ const SlipperModels = () => {
       <section className="section-padding bg-background">
         <div className="container-wide">
           {/* Filters */}
-          <div className="flex flex-wrap gap-2 mb-10">
+          <div className={`flex flex-wrap gap-2 mb-10 ${isRTL ? "flex-row-reverse" : ""}`}>
             {filters.map((filter) => (
               <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
+                key={filter.key}
+                onClick={() => setActiveFilter(filter.key)}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                  activeFilter === filter
+                  activeFilter === filter.key
                     ? "bg-primary text-primary-foreground"
                     : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
                 }`}
               >
-                {filter}
+                {filter.label}
               </button>
             ))}
           </div>
 
           {/* Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 ${isRTL ? "text-right" : ""}`}>
             {filteredModels.map((model, index) => (
               <div
-                key={model.id}
+                key={model.key}
                 className={`group bg-card rounded-2xl border border-border/50 overflow-hidden shadow-card hover:shadow-hover transition-all duration-300 animate-slide-up stagger-${(index % 5) + 1}`}
                 style={{ opacity: 0 }}
               >
@@ -168,9 +233,18 @@ const SlipperModels = () => {
                   </div>
                   {/* Specs */}
                   <div className="border-t border-border pt-4 mt-4 space-y-1 text-sm text-muted-foreground">
-                    <p><span className="font-medium text-foreground">Upper:</span> {model.specs.upper}</p>
-                    <p><span className="font-medium text-foreground">Sole:</span> {model.specs.sole}</p>
-                    <p><span className="font-medium text-foreground">Sizes:</span> {model.specs.sizes}</p>
+                    <p>
+                      <span className="font-medium text-foreground">{t("models.specs.upper")}:</span>{" "}
+                      {model.specs.upper}
+                    </p>
+                    <p>
+                      <span className="font-medium text-foreground">{t("models.specs.sole")}:</span>{" "}
+                      {model.specs.sole}
+                    </p>
+                    <p>
+                      <span className="font-medium text-foreground">{t("models.specs.sizes")}:</span>{" "}
+                      {model.specs.sizes}
+                    </p>
                   </div>
                 </div>
               </div>
@@ -178,12 +252,12 @@ const SlipperModels = () => {
           </div>
 
           {/* CTA */}
-          <div className="text-center mt-16">
+          <div className={`text-center mt-16 ${isRTL ? "text-right" : ""}`}>
             <p className="text-muted-foreground mb-4">
-              Need a custom model or have specific requirements?
+              {t("models.cta.text")}
             </p>
             <Button size="lg" asChild>
-              <Link to="/contact">Contact Us</Link>
+              <Link to="/contact">{t("models.cta.button")}</Link>
             </Button>
           </div>
         </div>

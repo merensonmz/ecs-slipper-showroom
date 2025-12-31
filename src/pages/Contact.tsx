@@ -5,17 +5,14 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, Phone, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { useTranslation } from "@/hooks/useTranslation";
 
-const interests = [
-  { id: "hotel", label: "Hotel slippers" },
-  { id: "retail", label: "Retail brand" },
-  { id: "corporate", label: "Corporate gifts" },
-  { id: "other", label: "Other" },
-];
+const interestKeys = ["hotel", "retail", "corporate", "other"] as const;
 
 const Contact = () => {
   const { toast } = useToast();
+  const { t, isRTL } = useTranslation();
   const [selectedInterests, setSelectedInterests] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -33,8 +30,8 @@ const Contact = () => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     toast({
-      title: "Message sent!",
-      description: "We'll get back to you within 1-2 business days.",
+      title: t("contact.toast.title"),
+      description: t("contact.toast.desc"),
     });
 
     setIsSubmitting(false);
@@ -42,21 +39,24 @@ const Contact = () => {
     setSelectedInterests([]);
   };
 
+  const addressLines = t("contact.info.address").split("\n");
+  const whatsappNumber = "+90 533 668 84 12";
+  const whatsappLink = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}`;
+
   return (
     <>
       {/* Header */}
       <section className="section-padding gradient-sand">
         <div className="container-wide">
-          <div className="max-w-3xl">
+          <div className={`max-w-3xl ${isRTL ? "text-right" : ""}`}>
             <p className="text-sm uppercase tracking-[0.2em] text-muted-foreground font-medium mb-4">
-              Get in Touch
+              {t("contact.badge")}
             </p>
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-display mb-6">
-              Let's build your slipper line together.
+              {t("contact.title")}
             </h1>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Tell us about your project, and we'll get back to you with 
-              options and a preliminary quote.
+              {t("contact.desc")}
             </p>
           </div>
         </div>
@@ -65,78 +65,78 @@ const Contact = () => {
       {/* Contact Form & Info */}
       <section className="section-padding bg-background">
         <div className="container-wide">
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className={`grid lg:grid-cols-3 gap-12 ${isRTL ? "text-right" : ""}`}>
             {/* Form */}
             <div className="lg:col-span-2">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="name">Name *</Label>
+                    <Label htmlFor="name">{t("contact.form.name")} *</Label>
                     <Input
                       id="name"
                       name="name"
                       required
-                      placeholder="Your name"
+                      placeholder={t("contact.form.placeholders.name")}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="company">Company *</Label>
+                    <Label htmlFor="company">{t("contact.form.company")} *</Label>
                     <Input
                       id="company"
                       name="company"
                       required
-                      placeholder="Company name"
+                      placeholder={t("contact.form.placeholders.company")}
                     />
                   </div>
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email *</Label>
+                    <Label htmlFor="email">{t("contact.form.email")} *</Label>
                     <Input
                       id="email"
                       name="email"
                       type="email"
                       required
-                      placeholder="you@company.com"
+                      placeholder={t("contact.form.placeholders.email")}
                     />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone (optional)</Label>
+                    <Label htmlFor="phone">{t("contact.form.phone")}</Label>
                     <Input
                       id="phone"
                       name="phone"
                       type="tel"
-                      placeholder="+1 234 567 8900"
+                      placeholder={t("contact.form.placeholders.phone")}
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="country">Country *</Label>
+                  <Label htmlFor="country">{t("contact.form.country")} *</Label>
                   <Input
                     id="country"
                     name="country"
                     required
-                    placeholder="Your country"
+                    placeholder={t("contact.form.placeholders.country")}
                   />
                 </div>
 
                 <div className="space-y-3">
-                  <Label>What are you interested in?</Label>
+                  <Label>{t("contact.form.interests")}</Label>
                   <div className="flex flex-wrap gap-4">
-                    {interests.map((interest) => (
-                      <div key={interest.id} className="flex items-center gap-2">
+                    {interestKeys.map((id) => (
+                      <div key={id} className="flex items-center gap-2">
                         <Checkbox
-                          id={interest.id}
-                          checked={selectedInterests.includes(interest.id)}
-                          onCheckedChange={() => toggleInterest(interest.id)}
+                          id={id}
+                          checked={selectedInterests.includes(id)}
+                          onCheckedChange={() => toggleInterest(id)}
                         />
                         <Label
-                          htmlFor={interest.id}
+                          htmlFor={id}
                           className="text-sm font-normal cursor-pointer"
                         >
-                          {interest.label}
+                          {t(`contact.interests.${id}`)}
                         </Label>
                       </div>
                     ))}
@@ -144,22 +144,22 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <Label htmlFor="message">Message *</Label>
+                  <Label htmlFor="message">{t("contact.form.message")} *</Label>
                   <Textarea
                     id="message"
                     name="message"
                     required
-                    placeholder="Tell us about your project, quantities, timeline, and any specific requirements..."
+                    placeholder={t("contact.form.placeholders.message")}
                     rows={5}
                   />
                 </div>
 
                 <p className="text-sm text-muted-foreground">
-                  You can write in English or Turkish.
+                  {t("contact.form.languageNote")}
                 </p>
 
                 <Button type="submit" size="lg" disabled={isSubmitting}>
-                  {isSubmitting ? "Sending..." : "Send Message"}
+                  {isSubmitting ? t("contact.form.sending") : t("contact.form.submit")}
                 </Button>
               </form>
             </div>
@@ -167,39 +167,58 @@ const Contact = () => {
             {/* Contact Info */}
             <div className="space-y-8">
               <div className="p-6 rounded-2xl bg-card border border-border/50 shadow-card">
-                <h3 className="font-display font-semibold mb-6">Contact Information</h3>
+                <h3 className="font-display font-semibold mb-6">
+                  {t("contact.info.title")}
+                </h3>
                 <div className="space-y-4">
                   <div className="flex items-start gap-3">
                     <Mail className="w-5 h-5 text-primary mt-0.5" />
                     <div>
-                      <p className="font-medium">Email</p>
+                      <p className="font-medium">{t("contact.info.email")}</p>
                       <a
                         href="mailto:info@blueflex-slippers.com"
                         className="text-muted-foreground hover:text-primary transition-colors"
                       >
-                        info@blueflex-slippers.com
+                        ali@ecsimportexport.com
                       </a>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <Phone className="w-5 h-5 text-primary mt-0.5" />
                     <div>
-                      <p className="font-medium">Phone / WhatsApp</p>
+                      <p className="font-medium">{t("contact.info.phone")}</p>
                       <a
-                        href="tel:+905550000000"
+                        href="tel:+905336688412"
                         className="text-muted-foreground hover:text-primary transition-colors"
                       >
-                        +90 555 000 00 00
+                        +90 533 668 84 12
+                      </a>
+                    </div>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <MessageCircle className="w-5 h-5 text-primary mt-0.5" />
+                    <div>
+                      <p className="font-medium">{t("contact.info.whatsapp")}</p>
+                      <a
+                        href={whatsappLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-muted-foreground hover:text-primary transition-colors"
+                      >
+                        {whatsappNumber}
                       </a>
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-primary mt-0.5" />
                     <div>
-                      <p className="font-medium">Factory Location</p>
+                      <p className="font-medium">{t("contact.info.location")}</p>
                       <p className="text-muted-foreground">
-                        Industrial Zone, Gaziantep<br />
-                        Türkiye
+                        {addressLines.map((line, idx) => (
+                          <span key={idx} className="block">
+                            {line}
+                          </span>
+                        ))}
                       </p>
                     </div>
                   </div>
@@ -207,16 +226,19 @@ const Contact = () => {
               </div>
 
               <div className="p-6 rounded-2xl bg-primary/5 border border-primary/10">
-                <h4 className="font-display font-semibold mb-2">Response Time</h4>
+                <h4 className="font-display font-semibold mb-2">
+                  {t("contact.responseTime.title")}
+                </h4>
                 <p className="text-sm text-muted-foreground leading-relaxed">
-                  We typically respond within 1-2 business days. For urgent 
-                  inquiries, feel free to reach us via WhatsApp.
+                  {t("contact.responseTime.desc")}
                 </p>
               </div>
 
               {/* Map Placeholder */}
               <div className="aspect-video rounded-2xl bg-muted flex items-center justify-center">
-                <p className="text-muted-foreground text-sm">Map placeholder</p>
+                <p className="text-muted-foreground text-sm">
+                  {t("contact.mapPlaceholder")}
+                </p>
               </div>
             </div>
           </div>

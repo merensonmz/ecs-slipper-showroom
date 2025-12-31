@@ -69,57 +69,140 @@ export const translations = {
     filters: {
       all: { tr: "Tümü", en: "All", ar: "الكل" },
       home: { tr: "Ev", en: "Home", ar: "المنزل" },
-      hotel: { tr: "Otel", en: "Hotel", ar: "الفندق" },
+      plain: { tr: "Düz", en: "Plain", ar: "سادة" },
+      beach: { tr: "Plaj", en: "Beach", ar: "شاطئ" },
+      sabo: { tr: "Sabo", en: "Clog", ar: "قبقاب" },
+      women: { tr: "Kadın", en: "Women", ar: "نساء" },
       kids: { tr: "Çocuk", en: "Kids", ar: "الأطفال" },
-      promotional: { tr: "Promosyon", en: "Promotional", ar: "ترويجي" }
+      eva: { tr: "EVA", en: "EVA", ar: "EVA" }
     },
     products: {
-      homeComfort: {
-        name: { tr: "Ev Konforu", en: "Home Comfort", ar: "راحة المنزل" },
+      winterCozyWomen: {
+        name: { tr: "Kışlık Kadın", en: "Winter Cozy Women", ar: "نسائي شتوي دافئ" },
         desc: {
-          tr: "Hafızalı köpük tabanlı en çok satan ev terliğimiz. Günlük iç mekan kullanımı için maksimum konfor ve dayanıklılık.",
-          en: "Our bestselling home slipper with memory foam insole. Perfect for everyday indoor use with maximum comfort and durability.",
-          ar: "شبشبنا المنزلي الأكثر مبيعاً مع نعل داخلي من الفوم الذكي. مثالي للاستخدام اليومي مع أقصى درجات الراحة والمتانة."
+          tr: "Sıcak astarlı, ev kullanımı için konforlu kışlık kadın terliği.",
+          en: "Warm-lined winter slipper for women, ideal for home use.",
+          ar: "شبشب شتوي مبطن للنساء، مثالي للاستخدام المنزلي."
         }
       },
-      hotelClassic: {
-        name: { tr: "Otel Klasik", en: "Hotel Classic", ar: "كلاسيك الفندق" },
+      merdaneWinter: {
+        name: { tr: "Merdane Kışlık", en: "Merdane Winter", ar: "ميردانه شتوي" },
         desc: {
-          tr: "Otel ve konaklama sektörü için zarif açık parmak tasarımı. Hafif, tek kullanımlık uygun ve toplu miktarlarda mevcut.",
-          en: "Elegant open-toe design for hotels and hospitality. Lightweight, disposable-friendly, and available in bulk quantities.",
-          ar: "تصميم أنيق مفتوح الأصابع للفنادق والضيافة. خفيف الوزن ومناسب للاستخدام لمرة واحدة ومتاح بكميات كبيرة."
+          tr: "EVA tabanlı, sıcak astarlı kışlık terlik.",
+          en: "EVA-soled winter slipper with warm lining.",
+          ar: "شبشب شتوي بنعل EVA وبطانة دافئة."
         }
       },
-      spaWellness: {
-        name: { tr: "Spa & Wellness", en: "Spa & Wellness", ar: "سبا وعافية" },
+      montaMan: {
+        name: { tr: "Monta Erkek", en: "Monta Man", ar: "مونتا رجالي" },
         desc: {
-          tr: "Spa ve wellness merkezleri için premium kapalı parmak terlik. Yumuşak, emici ve lüks misafir deneyimi için tasarlanmış.",
-          en: "Premium closed-toe slipper for spa and wellness centers. Soft, absorbent, and designed for a luxurious guest experience.",
-          ar: "شبشب فاخر مغلق الأصابع لمراكز السبا والعافية. ناعم وماص ومصمم لتجربة ضيوف فاخرة."
+          tr: "Hafif EVA tabanlı günlük erkek terliği.",
+          en: "Lightweight EVA-soled daily men's slipper.",
+          ar: "شبشب رجالي يومي بنعل EVA خفيف."
         }
       },
-      kidsCozy: {
-        name: { tr: "Çocuk Keyfi", en: "Kids Cozy", ar: "راحة الأطفال" },
+      montaMan2: {
+        name: { tr: "Monta Erkek 2", en: "Monta Man 2", ar: "مونتا رجالي 2" },
         desc: {
-          tr: "Çocuklar için eğlenceli ve renkli terlikler. Aktif küçük ayaklar için ekstra tutunma ile güvenli, yumuşak malzemeler.",
-          en: "Fun and colorful slippers for children. Safe, soft materials with extra grip for active little feet.",
-          ar: "شباشب ممتعة وملونة للأطفال. مواد آمنة وناعمة مع قبضة إضافية للأقدام الصغيرة النشطة."
+          tr: "Hafif EVA tabanlı günlük erkek terliği.",
+          en: "Lightweight EVA-soled daily men's slipper.",
+          ar: "شبشب رجالي يومي بنعل EVA خفيف."
         }
       },
-      corporateGift: {
-        name: { tr: "Kurumsal Hediye", en: "Corporate Gift", ar: "هدايا الشركات" },
+      montaMan3: {
+        name: { tr: "Monta Erkek 3", en: "Monta Man 3", ar: "مونتا رجالي 3" },
         desc: {
-          tr: "Kurumsal hediyeler ve promosyon kampanyaları için ideal yüksek kaliteli terlikler. Markanızla tamamen özelleştirilebilir.",
-          en: "High-quality slippers perfect for corporate gifts and promotional campaigns. Fully customizable with your branding.",
-          ar: "شباشب عالية الجودة مثالية لهدايا الشركات والحملات الترويجية. قابلة للتخصيص بالكامل مع علامتك التجارية."
+          tr: "Hafif EVA tabanlı günlük erkek terliği.",
+          en: "Lightweight EVA-soled daily men's slipper.",
+          ar: "شبشب رجالي يومي بنعل EVA خفيف."
         }
       },
-      travelLite: {
-        name: { tr: "Seyahat Hafif", en: "Travel Lite", ar: "سفر خفيف" },
+      montaMan4: {
+        name: { tr: "Monta Erkek 4", en: "Monta Man 4", ar: "مونتا رجالي 4" },
         desc: {
-          tr: "Seyahat setleri, havayolları ve konaklama karşılama paketleri için ideal kompakt katlanabilir terlikler.",
-          en: "Compact foldable slippers ideal for travel kits, airlines, and hospitality welcome packages.",
-          ar: "شباشب قابلة للطي مثالية لحقائب السفر وشركات الطيران وحزم الترحيب الفندقية."
+          tr: "Hafif EVA tabanlı günlük erkek terliği.",
+          en: "Lightweight EVA-soled daily men's slipper.",
+          ar: "شبشب رجالي يومي بنعل EVA خفيف."
+        }
+      },
+      summerMan: {
+        name: { tr: "Yazlık Erkek", en: "Summer Man", ar: "رجالي صيفي" },
+        desc: {
+          tr: "Hafif ve nefes alan yazlık erkek terliği.",
+          en: "Lightweight, breathable summer slipper for men.",
+          ar: "شبشب صيفي خفيف وجيد التهوية للرجال."
+        }
+      },
+      summerMan2: {
+        name: { tr: "Yazlık Erkek 2", en: "Summer Man 2", ar: "رجالي صيفي 2" },
+        desc: {
+          tr: "Hafif ve nefes alan yazlık erkek terliği.",
+          en: "Lightweight, breathable summer slipper for men.",
+          ar: "شبشب صيفي خفيف وجيد التهوية للرجال."
+        }
+      },
+      summerWomen: {
+        name: { tr: "Yazlık Kadın", en: "Summer Women", ar: "نسائي صيفي" },
+        desc: {
+          tr: "Hafif ve nefes alan yazlık kadın terliği.",
+          en: "Lightweight, breathable summer slipper for women.",
+          ar: "شبشب صيفي خفيف وجيد التهوية للنساء."
+        }
+      },
+      summerWomen2: {
+        name: { tr: "Yazlık Kadın 2", en: "Summer Women 2", ar: "نسائي صيفي 2" },
+        desc: {
+          tr: "Hafif ve nefes alan yazlık kadın terliği.",
+          en: "Lightweight, breathable summer slipper for women.",
+          ar: "شبشب صيفي خفيف وجيد التهوية للنساء."
+        }
+      },
+      summerWomen3: {
+        name: { tr: "Yazlık Kadın 3", en: "Summer Women 3", ar: "نسائي صيفي 3" },
+        desc: {
+          tr: "Hafif ve nefes alan yazlık kadın terliği.",
+          en: "Lightweight, breathable summer slipper for women.",
+          ar: "شبشب صيفي خفيف وجيد التهوية للنساء."
+        }
+      },
+      summerWomen4: {
+        name: { tr: "Yazlık Kadın 4", en: "Summer Women 4", ar: "نسائي صيفي 4" },
+        desc: {
+          tr: "Hafif ve nefes alan yazlık kadın terliği.",
+          en: "Lightweight, breathable summer slipper for women.",
+          ar: "شبشب صيفي خفيف وجيد التهوية للنساء."
+        }
+      },
+      summerWomen5: {
+        name: { tr: "Yazlık Kadın 5", en: "Summer Women 5", ar: "نسائي صيفي 5" },
+        desc: {
+          tr: "Hafif ve nefes alan yazlık kadın terliği.",
+          en: "Lightweight, breathable summer slipper for women.",
+          ar: "شبشب صيفي خفيف وجيد التهوية للنساء."
+        }
+      },
+      summerWomen6: {
+        name: { tr: "Yazlık Kadın 6", en: "Summer Women 6", ar: "نسائي صيفي 6" },
+        desc: {
+          tr: "Hafif ve nefes alan yazlık kadın terliği.",
+          en: "Lightweight, breathable summer slipper for women.",
+          ar: "شبشب صيفي خفيف وجيد التهوية للنساء."
+        }
+      },
+      summerWomen7: {
+        name: { tr: "Yazlık Kadın 7", en: "Summer Women 7", ar: "نسائي صيفي 7" },
+        desc: {
+          tr: "Hafif ve nefes alan yazlık kadın terliği.",
+          en: "Lightweight, breathable summer slipper for women.",
+          ar: "شبشب صيفي خفيف وجيد التهوية للنساء."
+        }
+      },
+      summerWomen8: {
+        name: { tr: "Yazlık Kadın 8", en: "Summer Women 8", ar: "نسائي صيفي 8" },
+        desc: {
+          tr: "Hafif ve nefes alan yazlık kadın terliği.",
+          en: "Lightweight, breathable summer slipper for women.",
+          ar: "شبشب صيفي خفيف وجيد التهوية للنساء."
         }
       }
     },
@@ -133,7 +216,12 @@ export const translations = {
       kids: { tr: "Çocuk", en: "Kids", ar: "الأطفال" },
       safeMaterials: { tr: "Güvenli Malzemeler", en: "Safe Materials", ar: "مواد آمنة" },
       promotional: { tr: "Promosyon", en: "Promotional", ar: "ترويجي" },
-      lightweight: { tr: "Hafif", en: "Lightweight", ar: "خفيف الوزن" }
+      lightweight: { tr: "Hafif", en: "Lightweight", ar: "خفيف الوزن" },
+      womenFocus: { tr: "Kadın Odaklı", en: "Women Focused", ar: "مخصص للنساء" },
+      evaSole: { tr: "EVA Taban", en: "EVA Sole", ar: "نعل EVA" },
+      warmLining: { tr: "Sıcak Astar", en: "Warm Lining", ar: "بطانة دافئة" },
+      saboStyle: { tr: "Sabo Model", en: "Clog Style", ar: "نمط قبقاب" },
+      breathable: { tr: "Nefes Alır", en: "Breathable", ar: "قابل للتهوية" }
     },
     specs: {
       upper: { tr: "Üst Kısım", en: "Upper", ar: "الجزء العلوي" },
@@ -151,15 +239,15 @@ export const translations = {
       tprAntiSlip: { tr: "TPR kaymaz", en: "TPR anti-slip", ar: "TPR مانع للانزلاق" },
       velour: { tr: "Velür", en: "Velour", ar: "مخمل" },
       microfiber: { tr: "Mikrofiber", en: "Microfiber", ar: "ألياف دقيقة" },
-      tpeFoldable: { tr: "TPE katlanabilir", en: "TPE foldable", ar: "TPE قابل للطي" }
+      tpeFoldable: { tr: "TPE katlanabilir", en: "TPE foldable", ar: "TPE قابل للطي" },
+      polyurethane: { tr: "Poliüretan", en: "Polyurethane", ar: "بولي يوريثان" }
     },
     cta: {
       text: { tr: "Özel model veya spesifik gereksinimleriniz mi var?", en: "Need a custom model or have specific requirements?", ar: "هل تحتاج إلى موديل مخصص أو لديك متطلبات محددة؟" },
       button: { tr: "Bize Ulaşın", en: "Contact Us", ar: "اتصل بنا" }
     }
   },
-
-  // Industries Page
+// Industries Page
   industries: {
     badge: { tr: "Ortaklarımız", en: "Our Partners", ar: "شركاؤنا" },
     title: { tr: "Hizmet Verdiğimiz Sektörler", en: "Industries We Serve", ar: "القطاعات التي نخدمها" },
