@@ -1,177 +1,146 @@
-﻿import { useState } from "react";
+import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
-import winterWomen from "@/assets/WinterWomen.jpg";
-import merdaneWinter from "@/assets/MerdaneWinter.jpg";
-import montaMan from "@/assets/MontaMan.jpg";
-import montaMan2 from "@/assets/MontaMan2.jpg";
-import montaMan3 from "@/assets/MontaMan3.jpg";
-import montaMan4 from "@/assets/MontaMan4.jpg";
-import summerMan from "@/assets/SummerMan.jpg";
-import summerMan2 from "@/assets/SummerMan2.jpg";
-import summerWomen from "@/assets/SummerWomen.jpg";
-import summerWomen2 from "@/assets/SummerWomen2.jpg";
-import summerWomen3 from "@/assets/SummerWomen3.jpg";
-import summerWomen4 from "@/assets/SummerWomen4.jpg";
-import summerWomen5 from "@/assets/SummerWomen5.jpg";
-import summerWomen6 from "@/assets/SummerWomen6.jpg";
-import summerWomen7 from "@/assets/SummerWomen7.jpg";
-import summerWomen8 from "@/assets/SummerWomen8.jpg";
 import { useTranslation } from "@/hooks/useTranslation";
+import { useQuery } from "@tanstack/react-query";
+import { supabase } from "@/lib/supabaseClient";
+import type { Language } from "@/i18n/translations";
 
-const filterConfig = ["all", "home", "plain", "beach", "sabo", "women", "kids", "eva"] as const;
-type FilterKey = (typeof filterConfig)[number];
-type CategoryKey = Exclude<FilterKey, "all">;
+const BUCKET = "slipper-images";
 
-type ModelConfigItem = {
-  key: string;
-  image: string;
-  categories: CategoryKey[];
-  tags: string[];
-  specs: { upper: string; sole: string; sizes: string };
+type Category = {
+  id: string;
+  name_tr: string | null;
+  name_en: string | null;
+  name_ar: string | null;
+  slug: string;
 };
-const modelConfig: readonly ModelConfigItem[] = [
-  {
-    key: "winterCozyWomen",
-    image: winterWomen,
-    categories: ["home", "women"],
-    tags: ["home", "womenFocus", "warmLining"],
-    specs: { upper: "softFleece", sole: "polyurethane", sizes: "36-41 EU" },
-  },
-  {
-    key: "merdaneWinter",
-    image: merdaneWinter,
-    categories: ["home", "eva"],
-    tags: ["evaSole", "warmLining"],
-    specs: { upper: "softPlush", sole: "evaAntiSlip", sizes: "40-45 EU" },
-  },
-  {
-    key: "montaMan",
-    image: montaMan,
-    categories: ["sabo", "eva"],
-    tags: ["saboStyle", "evaSole", "lightweight"],
-    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "40-45 EU" },
-  },
-  {
-    key: "montaMan2",
-    image: montaMan2,
-    categories: ["sabo", "eva"],
-    tags: ["saboStyle", "evaSole", "lightweight"],
-    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "40-45 EU" },
-  },
-  {
-    key: "montaMan3",
-    image: montaMan3,
-    categories: ["sabo", "eva"],
-    tags: ["saboStyle", "evaSole", "lightweight"],
-    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "40-45 EU" },
-  },
-  {
-    key: "montaMan4",
-    image: montaMan4,
-    categories: ["sabo", "eva"],
-    tags: ["saboStyle", "evaSole", "lightweight"],
-    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "40-45 EU" },
-  },
-  {
-    key: "summerMan",
-    image: summerMan,
-    categories: ["beach", "plain", "eva"],
-    tags: ["lightweight", "evaSole", "breathable"],
-    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "39-44 EU" },
-  },
-  {
-    key: "summerMan2",
-    image: summerMan2,
-    categories: ["beach", "plain", "eva"],
-    tags: ["lightweight", "evaSole", "breathable"],
-    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "39-44 EU" },
-  },
-  {
-    key: "summerWomen",
-    image: summerWomen,
-    categories: ["beach", "plain", "women", "eva"],
-    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
-    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
-  },
-  {
-    key: "summerWomen2",
-    image: summerWomen2,
-    categories: ["beach", "plain", "women", "eva"],
-    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
-    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
-  },
-  {
-    key: "summerWomen3",
-    image: summerWomen3,
-    categories: ["beach", "plain", "women", "eva"],
-    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
-    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
-  },
-  {
-    key: "summerWomen4",
-    image: summerWomen4,
-    categories: ["beach", "plain", "women", "eva"],
-    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
-    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
-  },
-  {
-    key: "summerWomen5",
-    image: summerWomen5,
-    categories: ["beach", "plain", "women", "eva"],
-    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
-    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
-  },
-  {
-    key: "summerWomen6",
-    image: summerWomen6,
-    categories: ["beach", "plain", "women", "eva"],
-    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
-    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
-  },
-  {
-    key: "summerWomen7",
-    image: summerWomen7,
-    categories: ["beach", "plain", "women", "eva"],
-    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
-    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
-  },
-  {
-    key: "summerWomen8",
-    image: summerWomen8,
-    categories: ["beach", "plain", "women", "eva"],
-    tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
-    specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
-  },
-];
+
+type Tag = {
+  id: string;
+  name_tr: string | null;
+  name_en: string | null;
+  name_ar: string | null;
+  slug: string;
+};
+
+type Slipper = {
+  id: string;
+  name_tr: string;
+  name_en: string | null;
+  name_ar: string | null;
+  desc_tr: string | null;
+  desc_en: string | null;
+  desc_ar: string | null;
+  image_path: string | null;
+  image_url: string | null;
+  sizes: string | null;
+  upper_tr: string | null;
+  upper_en: string | null;
+  upper_ar: string | null;
+  sole_tr: string | null;
+  sole_en: string | null;
+  sole_ar: string | null;
+  slipper_categories: { categories: Category }[];
+  slipper_tags: { tags: Tag }[];
+};
+
+const pickLocalized = (
+  item: Record<string, string | null | undefined>,
+  field: string,
+  language: Language
+) => {
+  return (
+    item[`${field}_${language}`] ??
+    item[`${field}_tr`] ??
+    item[`${field}_en`] ??
+    ""
+  );
+};
+
+const getImageUrl = (path: string | null, url: string | null) => {
+  if (url) return url;
+  if (!path) return "";
+  return supabase.storage.from(BUCKET).getPublicUrl(path).data.publicUrl;
+};
 
 const SlipperModels = () => {
-  const { t, isRTL } = useTranslation();
-  const [activeFilter, setActiveFilter] = useState<FilterKey>("all");
+  const { t, isRTL, language } = useTranslation();
+  const [activeFilter, setActiveFilter] = useState("all");
 
-  const filters = filterConfig.map((key) => ({
-    key,
-    label: t(`models.filters.${key}`),
-  }));
+  const fetchCategories = async (): Promise<Category[]> => {
+    const { data, error } = await supabase
+      .from("categories")
+      .select("id,name_tr,name_en,name_ar,slug")
+      .order("created_at", { ascending: true });
+    if (error) throw error;
+    return data ?? [];
+  };
 
-  const models = modelConfig.map((model) => ({
-    ...model,
-    name: t(`models.products.${model.key}.name`),
-    description: t(`models.products.${model.key}.desc`),
-    tags: model.tags.map((tag) => t(`models.tags.${tag}`)),
-    specs: {
-      upper: t(`models.materials.${model.specs.upper}`),
-      sole: t(`models.materials.${model.specs.sole}`),
-      sizes: model.specs.sizes,
-    },
-    categories: model.categories,
-  }));
+  const fetchSlippers = async (): Promise<Slipper[]> => {
+    const { data, error } = await supabase
+      .from("slippers")
+      .select(
+        "id,name_tr,name_en,name_ar,desc_tr,desc_en,desc_ar,image_path,image_url,sizes,upper_tr,upper_en,upper_ar,sole_tr,sole_en,sole_ar,slipper_categories(categories(id,name_tr,name_en,name_ar,slug)),slipper_tags(tags(id,name_tr,name_en,name_ar,slug))"
+      )
+      .order("created_at", { ascending: false });
+    if (error) throw error;
+    return data ?? [];
+  };
+
+  const {
+    data: categories = [],
+    isLoading: categoriesLoading,
+  } = useQuery({
+    queryKey: ["categories"],
+    queryFn: fetchCategories,
+  });
+
+  const {
+    data: slippers = [],
+    isLoading: slippersLoading,
+  } = useQuery({
+    queryKey: ["slippers"],
+    queryFn: fetchSlippers,
+  });
+
+  const filters = useMemo(() => {
+    const base = [{ key: "all", label: t("models.filters.all") }];
+    const dynamic = categories.map((category) => ({
+      key: category.slug,
+      label: pickLocalized(category, "name", language) || category.slug,
+    }));
+    return [...base, ...dynamic];
+  }, [categories, language, t]);
+
+  const mappedSlippers = useMemo(() => {
+    return slippers.map((slipper) => {
+      const categorySlugs = slipper.slipper_categories.map(
+        (item) => item.categories.slug
+      );
+      const tagLabels = slipper.slipper_tags.map((item) =>
+        pickLocalized(item.tags, "name", language)
+      );
+      return {
+        ...slipper,
+        name: pickLocalized(slipper, "name", language),
+        description: pickLocalized(slipper, "desc", language),
+        upperLabel: pickLocalized(slipper, "upper", language),
+        soleLabel: pickLocalized(slipper, "sole", language),
+        tagLabels,
+        categorySlugs,
+        image: getImageUrl(slipper.image_path, slipper.image_url),
+      };
+    });
+  }, [language, slippers]);
 
   const filteredModels =
     activeFilter === "all"
-      ? models
-      : models.filter((model) => model.categories.includes(activeFilter));
+      ? mappedSlippers
+      : mappedSlippers.filter((model) =>
+          model.categorySlugs.includes(activeFilter)
+        );
 
   return (
     <>
@@ -213,51 +182,71 @@ const SlipperModels = () => {
           </div>
 
           {/* Grid */}
-          <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 ${isRTL ? "text-right" : ""}`}>
-            {filteredModels.map((model, index) => (
-              <div
-                key={model.key}
-                className={`group bg-card rounded-2xl border border-border/50 overflow-hidden shadow-card hover:shadow-hover transition-all duration-300 animate-slide-up stagger-${(index % 5) + 1}`}
-                style={{ opacity: 0 }}
-              >
-                <div className="aspect-[4/3] overflow-hidden">
-                  <img
-                    src={model.image}
-                    alt={model.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-display font-semibold mb-2">{model.name}</h3>
-                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
-                    {model.description}
-                  </p>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {model.tags.map((tag) => (
-                      <Badge key={tag} variant="secondary" className="text-xs">
-                        {tag}
-                      </Badge>
-                    ))}
+          {categoriesLoading || slippersLoading ? (
+            <p className="text-muted-foreground">Loading...</p>
+          ) : filteredModels.length === 0 ? (
+            <p className="text-muted-foreground">No models yet.</p>
+          ) : (
+            <div className={`grid md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 ${isRTL ? "text-right" : ""}`}>
+              {filteredModels.map((model, index) => (
+                <div
+                  key={model.id}
+                  className={`group bg-card rounded-2xl border border-border/50 overflow-hidden shadow-card hover:shadow-hover transition-all duration-300 animate-slide-up stagger-${
+                    (index % 5) + 1
+                  }`}
+                  style={{ opacity: 0 }}
+                >
+                  <div className="aspect-[4/3] overflow-hidden">
+                    {model.image ? (
+                      <img
+                        src={model.image}
+                        alt={model.name}
+                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-muted" />
+                    )}
                   </div>
-                  {/* Specs */}
-                  <div className="border-t border-border pt-4 mt-4 space-y-1 text-sm text-muted-foreground">
-                    <p>
-                      <span className="font-medium text-foreground">{t("models.specs.upper")}:</span>{" "}
-                      {model.specs.upper}
+                  <div className="p-6">
+                    <h3 className="text-xl font-display font-semibold mb-2">
+                      {model.name}
+                    </h3>
+                    <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
+                      {model.description}
                     </p>
-                    <p>
-                      <span className="font-medium text-foreground">{t("models.specs.sole")}:</span>{" "}
-                      {model.specs.sole}
-                    </p>
-                    <p>
-                      <span className="font-medium text-foreground">{t("models.specs.sizes")}:</span>{" "}
-                      {model.specs.sizes}
-                    </p>
+                    <div className="flex flex-wrap gap-2 mb-4">
+                      {model.tagLabels.map((tag) => (
+                        <Badge key={tag} variant="secondary" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </div>
+                    {/* Specs */}
+                    <div className="border-t border-border pt-4 mt-4 space-y-1 text-sm text-muted-foreground">
+                      <p>
+                        <span className="font-medium text-foreground">
+                          {t("models.specs.upper")}:
+                        </span>{" "}
+                        {model.upperLabel}
+                      </p>
+                      <p>
+                        <span className="font-medium text-foreground">
+                          {t("models.specs.sole")}:
+                        </span>{" "}
+                        {model.soleLabel}
+                      </p>
+                      <p>
+                        <span className="font-medium text-foreground">
+                          {t("models.specs.sizes")}:
+                        </span>{" "}
+                        {model.sizes}
+                      </p>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))}
-          </div>
+              ))}
+            </div>
+          )}
 
           {/* CTA */}
           <div className={`text-center mt-16 ${isRTL ? "text-right" : ""}`}>

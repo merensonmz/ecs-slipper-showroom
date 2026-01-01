@@ -15,6 +15,7 @@ import Sustainability from "./pages/Sustainability";
 import FAQ from "./pages/FAQ";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
+import Admin from "./pages/Admin";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App = () => (
             <Route element={<Layout><Sustainability /></Layout>} path="/sustainability" />
             <Route element={<Layout><FAQ /></Layout>} path="/faq" />
             <Route element={<Layout><Contact /></Layout>} path="/contact" />
+            <Route path="/admin" element={<Admin />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
