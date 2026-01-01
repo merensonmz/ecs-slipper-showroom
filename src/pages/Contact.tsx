@@ -5,10 +5,10 @@ import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
-import { Mail, Phone, MapPin, MessageCircle } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
-const interestKeys = ["hotel", "retail", "corporate", "other"] as const;
+const interestKeys = ["wholesale", "retail", "corporate", "other"] as const;
 
 const Contact = () => {
   const { toast } = useToast();
@@ -40,9 +40,6 @@ const Contact = () => {
   };
 
   const addressLines = t("contact.info.address").split("\n");
-  const whatsappNumber = "+90 533 668 84 12";
-  const whatsappLink = `https://wa.me/${whatsappNumber.replace(/\D/g, "")}`;
-
   return (
     <>
       {/* Header */}
@@ -196,20 +193,6 @@ const Contact = () => {
                     </div>
                   </div>
                   <div className="flex items-start gap-3">
-                    <MessageCircle className="w-5 h-5 text-primary mt-0.5" />
-                    <div>
-                      <p className="font-medium">{t("contact.info.whatsapp")}</p>
-                      <a
-                        href={whatsappLink}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-muted-foreground hover:text-primary transition-colors"
-                      >
-                        {whatsappNumber}
-                      </a>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
                     <MapPin className="w-5 h-5 text-primary mt-0.5" />
                     <div>
                       <p className="font-medium">{t("contact.info.location")}</p>
@@ -234,11 +217,15 @@ const Contact = () => {
                 </p>
               </div>
 
-              {/* Map Placeholder */}
-              <div className="aspect-video rounded-2xl bg-muted flex items-center justify-center">
-                <p className="text-muted-foreground text-sm">
-                  {t("contact.mapPlaceholder")}
-                </p>
+              {/* Map */}
+              <div className="aspect-video rounded-2xl overflow-hidden bg-muted border border-border/50">
+                <iframe
+                  title="ECS Slippers & Sandals"
+                  src="https://maps.google.com/maps?q=loc:37.080349,37.423902&z=17&output=embed"
+                  className="w-full h-full"
+                  loading="lazy"
+                  referrerPolicy="no-referrer-when-downgrade"
+                />
               </div>
             </div>
           </div>

@@ -353,9 +353,9 @@ export const translations = {
       capacity: {
         title: { tr: "Üretim Kapasitesi", en: "Production Capacity", ar: "القدرة الإنتاجية" },
         desc: {
-          tr: "Ölçeklendirme imkanıyla aylık 50.000+ çift. Her seferde 500 ila 50.000 çift siparişleri karşılayabiliyoruz.",
-          en: "50,000+ pairs per month with room to scale. We can handle orders from 500 to 50,000 pairs per run.",
-          ar: "أكثر من 50,000 زوج شهرياً مع إمكانية التوسع. يمكننا التعامل مع طلبات من 500 إلى 50,000 زوج لكل دفعة."
+          tr: "Ölçeklendirme imkanıyla günlük 50.000+ çift. Her seferde 1200 ila 50.000 çift siparişleri karşılayabiliyoruz.",
+          en: "50,000+ pairs per daily with room to scale. We can handle orders from 1200 to 50,000 pairs per run.",
+          ar: "50,000+ زوج يومياً مع إمكانية التوسع. يمكننا التعامل مع الطلبات من 1200 إلى 50,000 زوج في كل مرة."
         }
       },
       quality: {
@@ -638,9 +638,9 @@ export const translations = {
       q8: {
         q: { tr: "Numune ürünler gönderebilir misiniz?", en: "Can you send sample products?", ar: "هل يمكنكم إرسال منتجات نموذجية؟" },
         a: {
-          tr: "Evet, mevcut yelpazemizden numuneler veya taleplerinize göre özel numuneler gönderebiliriz. Stok numuneler genellikle ücretsizdir (kargo sizden). Özel numunelerde toplu siparişinize mahsup edilen geliştirme ücreti vardır.",
-          en: "Yes, we can send samples from our existing range or create custom samples based on your requirements. Stock samples are typically free (you pay shipping). Custom samples have a development fee that's credited toward your bulk order.",
-          ar: "نعم، يمكننا إرسال عينات من مجموعتنا الحالية أو إنشاء عينات مخصصة بناءً على متطلباتك. العينات الجاهزة مجانية عادةً (أنت تدفع الشحن). العينات المخصصة لها رسوم تطوير تُخصم من طلبك بالجملة."
+          tr: "Evet, mevcut yelpazemizden numuneler veya taleplerinize göre özel numuneler gönderebiliriz. Stok numuneler ücretsizdir . Özel numunelerde toplu siparişinize mahsup edilen geliştirme ücreti vardır.",
+          en: "Yes, we can send samples from our existing range or create custom samples based on your requirements. Stock samples are  free . Custom samples have a development fee that's credited toward your bulk order.",
+          ar: "نعم، يمكننا إرسال عينات من مجموعتنا الحالية أو إنشاء عينات مخصصة بناءً على متطلباتك. العينات الجاهزة مجانية عادةً. العينات المخصصة لها رسوم تطوير تُخصم من طلبك بالجملة."
         }
       },
       q9: {
@@ -701,7 +701,7 @@ export const translations = {
       }
     },
     interests: {
-      hotel: { tr: "Otel terlikleri", en: "Hotel slippers", ar: "شباشب الفندق" },
+      wholesale: { tr: "Toptan terlik", en: "Wholesale slippers", ar: "أحذية منزلية بالجملة" },
       retail: { tr: "Perakende marka", en: "Retail brand", ar: "علامة تجارية للبيع بالتجزئة" },
       corporate: { tr: "Kurumsal hediyeler", en: "Corporate gifts", ar: "هدايا الشركات" },
       other: { tr: "Diğer", en: "Other", ar: "أخرى" }

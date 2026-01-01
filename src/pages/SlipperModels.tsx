@@ -1,4 +1,4 @@
-import { useState } from "react";
+﻿import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Link } from "react-router-dom";
@@ -22,8 +22,16 @@ import { useTranslation } from "@/hooks/useTranslation";
 
 const filterConfig = ["all", "home", "plain", "beach", "sabo", "women", "kids", "eva"] as const;
 type FilterKey = (typeof filterConfig)[number];
+type CategoryKey = Exclude<FilterKey, "all">;
 
-const modelConfig = [
+type ModelConfigItem = {
+  key: string;
+  image: string;
+  categories: CategoryKey[];
+  tags: string[];
+  specs: { upper: string; sole: string; sizes: string };
+};
+const modelConfig: readonly ModelConfigItem[] = [
   {
     key: "winterCozyWomen",
     image: winterWomen,
@@ -136,7 +144,7 @@ const modelConfig = [
     tags: ["womenFocus", "lightweight", "breathable", "evaSole"],
     specs: { upper: "microfiber", sole: "evaAntiSlip", sizes: "36-40 EU" },
   },
-] as const;
+];
 
 const SlipperModels = () => {
   const { t, isRTL } = useTranslation();
