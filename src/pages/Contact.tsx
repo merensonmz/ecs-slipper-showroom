@@ -22,21 +22,43 @@ const Contact = () => {
     );
   };
 
+  const isInterestValid = selectedInterests.length > 0;
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission
-    await new Promise((resolve) => setTimeout(resolve, 1000));
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+    formData.set("interests", selectedInterests.join(", "));
 
-    toast({
-      title: t("contact.toast.title"),
-      description: t("contact.toast.desc"),
-    });
+    try {
+      const response = await fetch("https://formspree.io/f/mkogopzb", {
+        method: "POST",
+        body: formData,
+        headers: { Accept: "application/json" },
+      });
 
-    setIsSubmitting(false);
-    (e.target as HTMLFormElement).reset();
-    setSelectedInterests([]);
+      if (!response.ok) {
+        const errorText = await response.text();
+        throw new Error(errorText || "Form submission failed");
+      }
+
+      toast({
+        title: t("contact.toast.title"),
+        description: t("contact.toast.desc"),
+      });
+      form.reset();
+      setSelectedInterests([]);
+    } catch (error) {
+      toast({
+        title: "Gönderim başarısız",
+        description: error instanceof Error ? error.message : "Lütfen tekrar deneyin.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const addressLines = t("contact.info.address").split("\n");
@@ -68,46 +90,46 @@ const Contact = () => {
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="name">{t("contact.form.name")} *</Label>
-                    <Input
-                      id="name"
-                      name="name"
-                      required
-                      placeholder={t("contact.form.placeholders.name")}
-                    />
+                  <Label htmlFor="name">{t("contact.form.name")} *</Label>
+                  <Input
+                    id="name"
+                    name="name"
+                    required
+                    placeholder={t("contact.form.placeholders.name")}
+                  />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="company">{t("contact.form.company")} *</Label>
-                    <Input
-                      id="company"
-                      name="company"
-                      required
-                      placeholder={t("contact.form.placeholders.company")}
-                    />
+                  <Label htmlFor="company">{t("contact.form.company")} *</Label>
+                  <Input
+                    id="company"
+                    name="company"
+                    required
+                    placeholder={t("contact.form.placeholders.company")}
+                  />
                   </div>
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <Label htmlFor="email">{t("contact.form.email")} *</Label>
-                    <Input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      placeholder={t("contact.form.placeholders.email")}
-                    />
+                  <Label htmlFor="email">{t("contact.form.email")} *</Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    placeholder={t("contact.form.placeholders.email")}
+                  />
                   </div>
                   <div className="space-y-2">
-                    <Label htmlFor="phone">{t("contact.form.phone")}</Label>
-                    <Input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      placeholder={t("contact.form.placeholders.phone")}
-                    />
-                  </div>
+                  <Label htmlFor="phone">{t("contact.form.phone")}</Label>
+                  <Input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    placeholder={t("contact.form.placeholders.phone")}
+                  />
                 </div>
+              </div>
 
                 <div className="space-y-2">
                   <Label htmlFor="country">{t("contact.form.country")} *</Label>
@@ -120,7 +142,7 @@ const Contact = () => {
                 </div>
 
                 <div className="space-y-3">
-                  <Label>{t("contact.form.interests")}</Label>
+                  <Label>{t("contact.form.interests")} *</Label>
                   <div className="flex flex-wrap gap-4">
                     {interestKeys.map((id) => (
                       <div key={id} className="flex items-center gap-2">
@@ -155,9 +177,14 @@ const Contact = () => {
                   {t("contact.form.languageNote")}
                 </p>
 
-                <Button type="submit" size="lg" disabled={isSubmitting}>
+                <Button type="submit" size="lg" disabled={isSubmitting || !isInterestValid}>
                   {isSubmitting ? t("contact.form.sending") : t("contact.form.submit")}
                 </Button>
+                {!isInterestValid && (
+                  <p className="text-sm text-destructive">
+                    Lütfen en az bir ilgi alanı seçin.
+                  </p>
+                )}
               </form>
             </div>
 

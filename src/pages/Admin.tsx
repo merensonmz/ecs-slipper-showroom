@@ -425,8 +425,11 @@ const Admin = () => {
     setSavingSlipper(false);
   };
 
-  const handleDeleteSlipper = async (id: string) => {
-    const { error } = await supabase.from("slippers").delete().eq("id", id);
+  const handleDeleteSlipper = async (slipper: SlipperRow) => {
+    if (slipper.image_path) {
+      await supabase.storage.from(BUCKET).remove([slipper.image_path]);
+    }
+    const { error } = await supabase.from("slippers").delete().eq("id", slipper.id);
     if (error) {
       toast({ title: "Ürün silinemedi", description: error.message, variant: "destructive" });
       return;
@@ -781,7 +784,7 @@ const Admin = () => {
                       <Button size="sm" variant="secondary" onClick={() => handleEditSlipper(slipper)}>
                         Düzenle
                       </Button>
-                      <Button size="sm" variant="destructive" onClick={() => handleDeleteSlipper(slipper.id)}>
+                      <Button size="sm" variant="destructive" onClick={() => handleDeleteSlipper(slipper)}>
                         Sil
                       </Button>
                     </div>

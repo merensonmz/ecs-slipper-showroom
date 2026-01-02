@@ -493,9 +493,9 @@ export const translations = {
     moq: {
       title: { tr: "Esnek Minimum Siparişler", en: "Flexible Minimum Orders", ar: "الحد الأدنى للطلبات المرن" },
       desc: {
-        tr: "Her projenin büyük olmadığını anlıyoruz. Özel siparişler için standart MOQ'muz 500 çift olsa da, numune serileri veya pilot programlar için daha küçük miktarları tartışabiliriz. Sizin için neyin uygun olduğunu konuşalım.",
-        en: "We understand not every project is huge. While our standard MOQ is 500 pairs for custom orders, we can discuss smaller quantities for sample runs or pilot programs. Let's talk about what works for you.",
-        ar: "نحن نفهم أن ليس كل مشروع كبير. بينما الحد الأدنى القياسي للطلب هو 500 زوج للطلبات المخصصة، يمكننا مناقشة كميات أصغر للدفعات التجريبية أو البرامج التجريبية. دعنا نتحدث عما يناسبك."
+        tr: "Her projenin büyük olmadığını anlıyoruz. Özel siparişler için standart MOQ'muz 1200 çift olsa da, numune serileri veya pilot programlar için daha küçük miktarları tartışabiliriz. Sizin için neyin uygun olduğunu konuşalım.",
+        en: "We understand not every project is huge. While our standard MOQ is 1200 pairs for custom orders, we can discuss smaller quantities for sample runs or pilot programs. Let's talk about what works for you.",
+        ar: "نحن نفهم أن ليس كل مشروع كبير. بينما الحد الأدنى القياسي للطلب هو 1200 زوج للطلبات المخصصة، يمكننا مناقشة كميات أصغر للدفعات التجريبية أو البرامج التجريبية. دعنا نتحدث عما يناسبك."
       },
       button: { tr: "Projenizi Başlatın", en: "Start Your Project", ar: "ابدأ مشروعك" }
     }
@@ -590,9 +590,9 @@ export const translations = {
       q2: {
         q: { tr: "Minimum sipariş miktarınız (MOQ) nedir?", en: "What is your minimum order quantity (MOQ)?", ar: "ما هو الحد الأدنى لكمية الطلب (MOQ)؟" },
         a: {
-          tr: "Özel siparişler için standart MOQ'muz 500 çifttir. Özelleştirme olmadan stok ürünler için daha küçük miktarları karşılayabiliriz. Numune siparişleri veya pilot programlar için lütfen seçenekleri tartışmak üzere bizimle iletişime geçin.",
-          en: "Our standard MOQ is 500 pairs for custom orders. For stock items without customization, we can accommodate smaller quantities. For sample orders or pilot programs, please contact us to discuss options.",
-          ar: "الحد الأدنى القياسي للطلب لدينا هو 500 زوج للطلبات المخصصة. للمنتجات الجاهزة بدون تخصيص، يمكننا استيعاب كميات أصغر. لطلبات العينات أو البرامج التجريبية، يرجى الاتصال بنا لمناقشة الخيارات."
+          tr: "Özel siparişler için standart MOQ'muz 1200 çifttir. Özelleştirme olmadan stok ürünler için daha küçük miktarları karşılayabiliriz. Numune siparişleri veya pilot programlar için lütfen seçenekleri tartışmak üzere bizimle iletişime geçin.",
+          en: "Our standard MOQ is 1200 pairs for custom orders. For stock items without customization, we can accommodate smaller quantities. For sample orders or pilot programs, please contact us to discuss options.",
+          ar: "الحد الأدنى القياسي للطلب لدينا هو 1200 زوج للطلبات المخصصة. للمنتجات الجاهزة بدون تخصيص، يمكننا استيعاب كميات أصغر. لطلبات العينات أو البرامج التجريبية، يرجى الاتصال بنا لمناقشة الخيارات."
         }
       },
       q3: {
