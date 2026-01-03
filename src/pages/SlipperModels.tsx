@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 import { Link } from "react-router-dom";
 import { useTranslation } from "@/hooks/useTranslation";
 import { useQuery } from "@tanstack/react-query";
@@ -25,6 +26,14 @@ type Tag = {
   slug: string;
 };
 
+type SlipperImage = {
+  id: string;
+  image_path: string | null;
+  image_url: string | null;
+  sort_order: number | null;
+  created_at: string;
+};
+
 type Slipper = {
   id: string;
   name_tr: string;
@@ -42,8 +51,13 @@ type Slipper = {
   sole_tr: string | null;
   sole_en: string | null;
   sole_ar: string | null;
+  is_published: boolean | null;
+  is_featured: boolean | null;
+  sort_order: number | null;
+  season: string | null;
   slipper_categories: { categories: Category }[];
   slipper_tags: { tags: Tag }[];
+  slipper_images: SlipperImage[];
 };
 
 const pickLocalized = (
@@ -82,9 +96,13 @@ const SlipperModels = () => {
     const { data, error } = await supabase
       .from("slippers")
       .select(
-        "id,name_tr,name_en,name_ar,desc_tr,desc_en,desc_ar,image_path,image_url,sizes,upper_tr,upper_en,upper_ar,sole_tr,sole_en,sole_ar,slipper_categories(categories(id,name_tr,name_en,name_ar,slug)),slipper_tags(tags(id,name_tr,name_en,name_ar,slug))"
+        "id,name_tr,name_en,name_ar,desc_tr,desc_en,desc_ar,image_path,image_url,sizes,upper_tr,upper_en,upper_ar,sole_tr,sole_en,sole_ar,is_published,is_featured,sort_order,season,slipper_categories(categories(id,name_tr,name_en,name_ar,slug)),slipper_tags(tags(id,name_tr,name_en,name_ar,slug)),slipper_images(id,image_path,image_url,sort_order,created_at)"
       )
-      .order("created_at", { ascending: false });
+      .eq("is_published", true)
+      .order("is_featured", { ascending: false })
+      .order("sort_order", { ascending: true })
+      .order("created_at", { ascending: false })
+      .order("sort_order", { ascending: true, foreignTable: "slipper_images" });
     if (error) throw error;
     return data ?? [];
   };
@@ -122,6 +140,15 @@ const SlipperModels = () => {
       const tagLabels = slipper.slipper_tags.map((item) =>
         pickLocalized(item.tags, "name", language)
       );
+      const galleryImages = (slipper.slipper_images ?? [])
+        .map((image) => getImageUrl(image.image_path, image.image_url))
+        .filter(Boolean);
+      const primaryImage =
+        getImageUrl(slipper.image_path, slipper.image_url) ||
+        galleryImages[0] ||
+        "";
+      const gallerySet = new Set([primaryImage, ...galleryImages].filter(Boolean));
+      const images = Array.from(gallerySet);
       return {
         ...slipper,
         name: pickLocalized(slipper, "name", language),
@@ -130,7 +157,9 @@ const SlipperModels = () => {
         soleLabel: pickLocalized(slipper, "sole", language),
         tagLabels,
         categorySlugs,
-        image: getImageUrl(slipper.image_path, slipper.image_url),
+        image: primaryImage,
+        galleryImages,
+        images,
       };
     });
   }, [language, slippers]);
@@ -197,12 +226,22 @@ const SlipperModels = () => {
                   style={{ opacity: 0 }}
                 >
                   <div className="aspect-[4/3] overflow-hidden">
-                    {model.image ? (
-                      <img
-                        src={model.image}
-                        alt={model.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
+                    {model.images.length > 0 ? (
+                      <Carousel opts={{ loop: true }}>
+                        <CarouselContent>
+                          {model.images.map((image) => (
+                            <CarouselItem key={image}>
+                              <img
+                                src={image}
+                                alt={model.name}
+                                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                              />
+                            </CarouselItem>
+                          ))}
+                        </CarouselContent>
+                        <CarouselPrevious />
+                        <CarouselNext />
+                      </Carousel>
                     ) : (
                       <div className="w-full h-full bg-muted" />
                     )}
