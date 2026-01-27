@@ -1,7 +1,6 @@
 # Blueflex Slipper Showroom
 
-<<<<<<< ours
-Blueflex Slipper Showroom is a multi-page React + TypeScript experience that highlights Blueflex indoor slipper lines, customization workflows, and factory capabilities for wholesale buyers. It is built with Vite, Tailwind CSS, shadcn-ui, React Router, and TanStack Query with multi-language support.
+Blueflex Slipper Showroom is a multi-page React + TypeScript.
 
 ## Prerequisites
 - Node.js 18+ (Node 20 LTS recommended for Vite 5)
