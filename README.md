@@ -1,86 +1,135 @@
-# Blueflex Slipper Showroom
+# ECS Slipper Showroom
 
-Blueflex Slipper Showroom is a multi-page React + TypeScript.
+A modern, responsive product showroom website built for a slipper manufacturing business.
 
-## Prerequisites
-- Node.js 18+ (Node 20 LTS recommended for Vite 5)
-- npm (bundled with Node.js)
+This project includes a public-facing product showcase and an admin panel structure powered by Supabase for managing website content and product-related data.
 
-## Getting started
-1) Clone the repository and enter the project folder.
-2) Install dependencies: `npm install`.
-3) Start the local dev server: `npm run dev` (defaults to http://localhost:5173).
+## 🚀 Live Demo
 
-## Available scripts
-- `npm run dev` � start the Vite dev server with hot reload.
-- `npm run build` � create a production build in `dist/`.
-- `npm run build:dev` � build in development mode for debugging bundled output.
-- `npm run preview` � serve the built `dist/` locally (run after `npm run build`).
-- `npm run lint` � lint the project with ESLint.
+Live website: `<LIVE_DEMO_LINK>`
 
-## Development workflow
-- Pages live in `src/pages`, shared components in `src/components`, and routing is defined in `src/App.tsx`.
-- Styling uses Tailwind CSS and shadcn-ui; adjust design tokens in `tailwind.config.ts`.
-- Locale strings and language handling are under `src/i18n`.
+## 📌 Project Overview
 
-## Testing & quality
-- Run `npm run lint` before committing to catch lint and type issues; add tests as needed alongside features.
+ECS Slipper Showroom is a business-focused web application designed to present slipper products, company identity, and contact information through a clean and responsive interface.
 
-## Build & deployment
-- Build for production with `npm run build`; output files are emitted to `dist/`.
-- Preview the production build locally via `npm run preview`.
-- Deploy by serving the `dist/` folder on any static host or behind your CI/CD pipeline (e.g., Vercel, Netlify, S3 + CloudFront, or nginx).
+Unlike a traditional e-commerce platform, this project focuses on product presentation and brand visibility rather than online payments or customer accounts. The project also includes an admin-oriented content management structure using Supabase, making it easier to manage showroom content from a backend service.
 
-## Tech stack
-- Vite + React 18 + TypeScript
-- Tailwind CSS + shadcn-ui + Radix primitives
-- React Router and TanStack Query
-=======
-Modern, Vite-powered React UI that highlights the Blueflex slipper collection with responsive layouts, animations, and shadcn-ui components.
+## 🛠️ Tech Stack
 
-## Prerequisites
-- Node.js **18+** (Node 20 recommended). Install via [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) for easy version management.
-- npm (ships with Node.js).
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* shadcn/ui
+* Radix UI
+* React Router
+* Supabase
+* React Query
+* Lucide React
+* Vitest
 
-## Developer setup
-1. Clone the repository and navigate into it.
-   ```sh
-   git clone <YOUR_GIT_URL>
-   cd ecs-slipper-showroom
-   ```
-2. Install dependencies.
-   ```sh
-   npm install
-   ```
-3. Start the development server with hot reload.
-   ```sh
-   npm run dev
-   ```
-   Vite prints the local and network URLs in the terminal (default: http://localhost:5173).
+## ✨ Features
 
-## Available scripts
-- **npm run dev** – Start the Vite dev server for local development.
-- **npm run build** – Create an optimized production build in the `dist/` directory.
-- **npm run build:dev** – Produce a development-mode bundle (useful for integration environments that expect a build artifact but still need readable output).
-- **npm run preview** – Serve the contents of `dist/` to verify a production build locally.
-- **npm run lint** – Run ESLint across the project source.
+* Responsive product showroom website
+* Modern landing page design
+* Product and content presentation sections
+* Admin panel structure for content management
+* Supabase integration for backend/data management
+* Mobile-friendly navigation
+* Reusable React components
+* Clean and professional UI structure
+* Contact-oriented layout for business inquiries
+* Fast development setup with Vite
+* Basic testing setup with Vitest
 
-## Testing, linting, and builds
-- Run linters before committing to keep code quality consistent:
-  ```sh
-  npm run lint
-  ```
-- Create a production build to validate that assets compile correctly:
-  ```sh
-  npm run build
-  ```
-- Inspect the compiled build locally (after running `npm run build`):
-  ```sh
-  npm run preview
-  ```
+## 📁 Project Structure
 
-## Deployment
-1. Ensure dependencies are installed and the project builds successfully (`npm run build`).
-2. Deploy the contents of the `dist/` directory to your static hosting of choice (e.g., Netlify, Vercel, or an S3 + CDN setup).
-3. If your platform supports build commands, configure it to run `npm install` followed by `npm run build` with Node.js 18+.
->>>>>>> theirs
+```bash
+ecs-slipper-showroom/
+├── public/
+├── src/
+│   ├── components/
+│   ├── hooks/
+│   ├── lib/
+│   ├── pages/
+│   ├── App.tsx
+│   └── main.tsx
+├── package.json
+├── vite.config.ts
+└── README.md
+```
+
+## ⚙️ Getting Started
+
+To run the project locally:
+
+```bash
+npm install
+npm run dev
+```
+
+Then open the local development URL shown in the terminal.
+
+## 🏗️ Build
+
+To create a production build:
+
+```bash
+npm run build
+```
+
+To preview the production build locally:
+
+```bash
+npm run preview
+```
+
+## 🧪 Tests
+
+To run tests:
+
+```bash
+npm run test
+```
+
+For a single test run:
+
+```bash
+npm run test:run
+```
+
+## 🔐 Environment Variables
+
+This project uses Supabase for backend/data management. Environment variables should be stored locally and must not be committed to the repository.
+
+Create a local `.env` file if needed:
+
+```env
+VITE_SUPABASE_URL=your_supabase_project_url
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+Do not commit private keys, service role keys, database passwords, or JWT secrets.
+
+## 🎯 Purpose of the Project
+
+This project was created to improve my hands-on experience with React, TypeScript, Supabase, responsive frontend development, component-based architecture, and real-world business website implementation.
+
+It also represents my ability to turn a traditional business idea into a modern, deployable, and manageable web application.
+
+## 📚 What I Learned
+
+During this project, I improved my skills in:
+
+* Building reusable React components
+* Creating responsive layouts for desktop and mobile devices
+* Structuring a Vite-based React project
+* Working with TypeScript in a frontend application
+* Integrating Supabase into a React project
+* Designing a product showroom experience
+* Building an admin-oriented content management structure
+* Preparing a frontend project for deployment
+
+## 📄 License
+
+This project is for portfolio and demonstration purposes.
