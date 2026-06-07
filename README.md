@@ -4,9 +4,6 @@ A modern, responsive product showroom website built for a slipper manufacturing 
 
 This project includes a public-facing product showcase and an admin panel structure powered by Supabase for managing website content and product-related data.
 
-## 🚀 Live Demo
-
-Live website: `<LIVE_DEMO_LINK>`
 
 ## 📌 Project Overview
 
